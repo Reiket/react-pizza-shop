@@ -1,0 +1,96 @@
+//====================================================================================================
+@use 'sass:math';
+@import "base/mixins";
+.sort {
+  @include adaptiveValue("padding-top", 40, 25);
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__buttons {
+    display: flex;
+    align-items: center;
+    gap: rem(9);
+  }
+  &__btn {
+    background: #F9F9F9;
+    border-radius: rem(30);
+    color: $mainDarkColor;
+    letter-spacing: 0.015em;
+    padding: rem(13) rem(23);
+    font-size: rem(16);
+    font-weight: 700;
+    line-height: math.div(19 ,16 );
+    -webkit-transition: all 0.3s ease 0s;-moz-transition: all 0.3s ease 0s;-ms-transition: all 0.3s ease 0s;-o-transition: all 0.3s ease 0s;transition: all 0.3s ease 0s;
+    @media (any-hover: hover){
+        &:hover {
+            background: $mainDarkColor;
+            color: #F9F9F9;
+        }
+    }
+  }
+  &__category {}
+  &__text {
+    font-weight: 700;
+    color: $mainDarkColor;
+    line-height: math.div(17 , 16);
+    font-size: rem(16);
+    padding-bottom: rem(10);
+    letter-spacing: 0.015em;
+    cursor: pointer;
+    &::before {
+        display: inline-block;
+        transform: rotate(-180deg);
+        padding-left: rem(7);
+    }
+    span {
+      color: $orangeColor;
+      font-weight: 400;
+      position: relative;
+      &::after {
+          position: absolute;
+          right: 0;
+          display: block;
+          content:'';
+          width: rem(80);
+          height: rem(1);
+          border-bottom: rem(1) dashed $orangeColor;
+      }
+    }
+  }
+  &__list {
+    background: #FFFFFF;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.09);
+    border-radius: rem(10);
+    width: rem(132);
+    height: rem(136);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    right: 0;
+    position: absolute;
+    visibility: visible;
+    pointer-events: none;
+    opacity: 0;
+  }
+  &__item {
+    font-size: rem(16);
+    font-weight: 600;
+    height: rem(30);
+    display: flex;
+    -webkit-transition: all 0.3s ease 0s;-moz-transition: all 0.3s ease 0s;-ms-transition: all 0.3s ease 0s;-o-transition: all 0.3s ease 0s;transition: all 0.3s ease 0s;
+      span {
+        align-self: center;
+        padding-left: rem(14);
+      }
+      @media (any-hover: hover){
+        &:hover {
+          font-weight: 600;
+          background: rgba(254, 95, 30, 0.05);
+          color: $orangeColor;
+        }
+      }
+  }
+}
+//====================================================================================================
