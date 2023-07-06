@@ -13,6 +13,9 @@
     justify-content: space-between;
     align-items: center;
     gap: rem(12);
+    &:not(:last-child) {
+        margin-bottom: rem(20);
+     }
   }
   &__logo {
     display: flex;
@@ -80,6 +83,40 @@
           padding-left: rem(12);
         }
 
+    }
+  }
+  &__form {
+    display: flex;
+    align-self: center;
+    align-items: center;
+    border: rem(1) solid #a6a4a4;
+    border-radius: rem(10);
+    flex: 0 0 rem(450);
+    height: rem(50);
+  }
+  &__input {
+    flex: 1 1 auto;
+    outline: none;
+    width: 100%;
+    font-size: rem(16);
+    color: $mainDarkColor;
+    &::placeholder {
+      color: #a6a4a4;
+      font-size: rem(16);
+    }
+  }
+  &__search {
+    &::before {
+        font-size: rem(18);
+      padding: 0 rem(15);
+    }
+  }
+  &__clear {
+    flex: 0 0 rem(50);
+    height: rem(50);
+    &::before {
+        display: block;
+        transform: rotate(45deg);
     }
   }
 }
