@@ -85,7 +85,7 @@ function SectionCard() {
                 <div className="section__container">
                     <h2 className="section__title">Всі піци</h2>
                     <div className="section__inner">
-                        {status === 'loading' ? [...new Array(10)].map((_, index) => <CardLoader key={index}/>) : items.map((obj) => <Link key={obj.id} to={`/pizza/${obj.id}`}><Card {...obj}/></Link>)}
+                        {status === 'loading' ? [...new Array(10)].map((_, index) => <CardLoader key={index}/>) : items.map((obj) => <Card key={obj.id} {...obj}/>)}
                     </div>
                    <Pagination currentPage={currentPage} onChangePage = {(num) => onChangeCurrentPage(num)}/>
 

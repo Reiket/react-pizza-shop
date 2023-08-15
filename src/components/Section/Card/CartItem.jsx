@@ -25,7 +25,7 @@ const CartItem = ({id, title, price, count, size, imageUrl, type}) => {
                 <div className="section-cart__description">{type}, {size}см</div>
             </div>
             <div className="section-cart__amount">
-                <button onClick={onClickMinus} className="section-cart__button">-</button>
+                <button onClick={onClickMinus} disabled={count === 0} className="section-cart__button">-</button>
                 <span className="section-cart__count">{count}</span>
                 <button onClick={onClickPlus} className="section-cart__button">+</button>
             </div>

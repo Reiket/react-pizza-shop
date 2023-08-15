@@ -43,7 +43,7 @@ function SectionCart(props) {
                     <div className="section-cart__inner">
                         <h2 className="section-cart__title title">Кошик пустий 😕</h2>
                         <div className="section-cart__text">Йморівно ви не замовляли ще піцу. Щоб замовити піцу, перейди на головну сторінку.</div>
-                        <div className="section-cart__picture"><img src="/assets/images/cart/01.png" alt="Cart-Picture"/></div>
+                        <div className="section-cart__picture"><img src="assets/images/cart/01.png" alt="Cart-Picture"/></div>
                         <Link to={"/"} className="cart-bottom__btn dark">Повернутись назад</Link>
                     </div>
                 )}

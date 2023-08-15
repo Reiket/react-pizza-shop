@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link, NavLink, useLocation} from "react-router-dom";
-import Context from "../../Context/Context";
 import debounce from "lodash.debounce";
 import {useDispatch, useSelector} from "react-redux";
 import {selectCart} from "../../redux/slices/cart-slice";
@@ -48,7 +47,7 @@ function Header() {
                 <div  className="header__body">
                     <div className="header__logo">
                         <Link to={'/'} className="header__img">
-                            <img src="/assets/images/logo/logo.png" alt="Logo"/>
+                            <img src="assets/images/logo/logo.png" alt="Logo"/>
                         </Link>
                         <div className="header__info">
                             <h1 className="header__title">REACT PIZZA</h1>

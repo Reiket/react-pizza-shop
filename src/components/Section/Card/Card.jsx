@@ -1,6 +1,7 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {addItem, selectCartItem} from "../../../redux/slices/cart-slice";
+import {Link} from "react-router-dom";
 
 const typeName = ["Тонка", "Традиційна"];
 function Card({id, title, price, sizes, imageUrl, types}) {
@@ -41,7 +42,7 @@ function Card({id, title, price, sizes, imageUrl, types}) {
     return (
         <div className="section__card card-item">
             <div className="card-item__body">
-                <div className="card-item__image"><img src={imageUrl} alt="Pizza-Card"/>
+                <div className="card-item__image"><Link to={`/pizza/${id}`}><img src={imageUrl} alt="Pizza-Card"/></Link>
                 </div>
                 <h3 className="card-item__title">{title}</h3>
                 <div className="card-item__bar">

@@ -2,8 +2,6 @@ import React from "react";
 import Header from "./components/Header/Header";
 import SectionCart from "./components/Section/SectionCart";
 import {Route, Routes} from "react-router-dom";
-
-import Context from "./Context/Context";
 import SectionCard from "./components/Section/SectionCard";
 import {store} from "./redux/redux-store";
 import {Provider} from "react-redux";
