@@ -1,11 +1,17 @@
+// @ts-ignore
 import React from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import {itemsAPI} from "../../../api/api";
+type PizzaType = {
+    imageUrl: string,
+    title: string,
+    price: number
+}
 
-function FullPizza() {
+const FullPizza : React.FC  = () => {
     const {id} = useParams();
     const navigate = useNavigate();
-    const [pizza, setPizza] = React.useState({});
+    const [pizza, setPizza] = React.useState<PizzaType>();
     React.useEffect(() => {
         async function fetchPizza() {
             try {
@@ -21,7 +27,7 @@ function FullPizza() {
     }, [])
 
     if(!pizza) {
-        return "Loading......"
+        return <>"Loading......"</>
     }
     return (
         <div className={"__container"}>
@@ -34,4 +40,8 @@ function FullPizza() {
 
 export default FullPizza;
 
+
+function alert(arg0: string) {
+    throw new Error('Function not implemented.');
+}
 

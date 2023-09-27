@@ -3,10 +3,10 @@ import Card from "./Card/Card";
 import CardLoader from "./Card/CardLoader";
 import qs from 'qs'
 import Sort from "../Sort/Sort";
-import Context from "../../Context/Context";
 import Pagination from "./Pagination";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {
+    FilterSliceState,
     selectFilter,
     selectSort,
     setCategoryId,
@@ -16,6 +16,7 @@ import {
 } from "../../redux/slices/filter-slice";
 import {useNavigate, useLocation, Link} from 'react-router-dom';
 import {fetchItems, selectPizzaData} from "../../redux/slices/pizzas-slice";
+import {useAppDispatch} from "../../redux/redux-store";
 
 
 function SectionCard() {
@@ -28,7 +29,7 @@ function SectionCard() {
     const isSearch = React.useRef(false);
     const isMounted = React.useRef(false);
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -36,37 +37,36 @@ function SectionCard() {
         dispatch(fetchItems({categoryId, sortCategory, conditionSort, searchValue, currentPage}))
      }
 
-    React.useEffect(() => {
-        console.log(location.search)
-        if (location.search) {
-            const params = qs.parse(location.search.substring(1));
-            dispatch(setFilters({...params}));
-            isSearch.current = true;
-        }
-    }, [])
+    // React.useEffect(() => {
+    //     if (location.search) {
+    //         const params = (qs.parse(location.search.substring(1)) as unknown) as FilterSliceState;
+    //         dispatch(setFilters({...params}));
+    //         isSearch.current = true;
+    //     }
+    // }, [])
 
     React.useEffect(() => {
         fetchPizzas();
         isSearch.current = false;
     }, [categoryId, sortCategory, conditionSort, searchValue, currentPage]);
 
-    React.useEffect(() => {
-       if (isMounted.current) {
-           const queryString    = qs.stringify({
-               sortCategory,
-               categoryId,
-               currentPage,
-           });
-           navigate(`?${queryString}`);
-       }
-       isMounted.current = true;
-    }, [categoryId, sortCategory, conditionSort, searchValue, currentPage]);
+    // React.useEffect(() => {
+    //    if (isMounted.current) {
+    //        const queryString    = qs.stringify({
+    //            sortCategory,
+    //            categoryId,
+    //            currentPage,
+    //        });
+    //        navigate(`?${queryString}`);
+    //    }
+    //    isMounted.current = true;
+    // }, [categoryId, sortCategory, conditionSort, searchValue, currentPage]);
 
-    const onClickCategory = (index) => {
+    const onClickCategory = (index: number) => {
         dispatch(setCategoryId(index));
     };
 
-    const onClickSort = (sortId, sortCategory) => {
+    const onClickSort = (sortId: number, sortCategory: string) => {
         dispatch(setSort({ sortId, sortCategory }));
     };
 
@@ -74,7 +74,7 @@ function SectionCard() {
         setConditionSort(prev => !prev);
     };
 
-    const onChangeCurrentPage = (num) => {
+    const onChangeCurrentPage = (num: number) => {
         dispatch(setCurrentPage(num));
     };
 
@@ -85,7 +85,7 @@ function SectionCard() {
                 <div className="section__container">
                     <h2 className="section__title">Всі піци</h2>
                     <div className="section__inner">
-                        {status === 'loading' ? [...new Array(10)].map((_, index) => <CardLoader key={index}/>) : items.map((obj) => <Card key={obj.id} {...obj}/>)}
+                        {status === 'loading' ? [...new Array(10)].map((_, index) => <CardLoader key={index}/>) : items.map((obj: any) => <Card key={obj.id} {...obj}/>)}
                     </div>
                    <Pagination currentPage={currentPage} onChangePage = {(num) => onChangeCurrentPage(num)}/>
 

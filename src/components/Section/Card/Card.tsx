@@ -1,41 +1,51 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {addItem, selectCartItem} from "../../../redux/slices/cart-slice";
+import {addItem, CartItemType, selectCartItem} from "../../../redux/slices/cart-slice";
 import {Link} from "react-router-dom";
 
-const typeName = ["Тонка", "Традиційна"];
-function Card({id, title, price, sizes, imageUrl, types}) {
+type PropsType = {
+    id: string
+    title: string
+    price: number
+    sizes: Array<number>
+    imageUrl: string
+    types: Array<number>
+}
+
+const typeName:Array<string> = ["Тонка", "Традиційна"];
+const Card: React.FC<PropsType> = ({id, title, price, sizes, imageUrl, types}) => {
     const dispatch = useDispatch();
-    const [typeId, setTypeId] = React.useState(null);
-    const [sizeId, setSizeId] = React.useState(null);
+    const [typeId, setTypeId] = React.useState(0);
+    const [sizeId, setSizeId] = React.useState(0);
     const cartItem = useSelector(selectCartItem(id));
     const addedCount = cartItem ? cartItem.count : 0
     const onClickAdd = () => {
-        const item = {
+        const item: CartItemType = {
             id,
             title,
             price,
             imageUrl,
             type: typeName[typeId],
             size: sizes[sizeId],
+            count: 0,
 
         };
         dispatch(addItem(item));
     }
 
-    function onClickToType(index) {
+    function onClickToType(index: number) {
        if (typeId !== index) {
            setTypeId(index);
        } else {
-           setTypeId(null);
+           setTypeId(0);
        }
     }
 
-    function onClickToSize(index) {
+    function onClickToSize(index: number) {
         if (sizeId !== index) {
             setSizeId(index);
         } else {
-            setSizeId(null);
+            setSizeId(0);
         }
     }
 

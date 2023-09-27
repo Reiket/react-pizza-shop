@@ -1,18 +1,19 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import {Link, NavLink, useLocation} from "react-router-dom";
 import debounce from "lodash.debounce";
 import {useDispatch, useSelector} from "react-redux";
 import {selectCart} from "../../redux/slices/cart-slice";
 import {setSearchValue} from "../../redux/slices/filter-slice";
+import {RootState} from "~/src/redux/redux-store";
 
 function Header() {
     const [value, setValue] = React.useState('');
     const [isMoving, setIsMoving] = React.useState(false);
     const dispatch = useDispatch();
-    const inputRef = React.useRef();
+    const inputRef = React.useRef<HTMLInputElement>(null);
     const {items, totalPrice} = useSelector(selectCart);
-    const searchValue = useSelector(state => state.filter.searchValue);
-    const totalCount = items.reduce((sum, item) => sum + item.count, 0);
+    const searchValue = useSelector((state: RootState) => state.filter.searchValue);
+    const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0);
     const {pathname} = useLocation();
     React.useEffect(() => {
         const handleResize = () => {
@@ -25,7 +26,7 @@ function Header() {
         }
     }, [])
 
-    const onChangeSearchValue = (e) => {
+    const onChangeSearchValue = (e: ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value)
         updateSearchValue(e.target.value)
     }
@@ -39,7 +40,7 @@ function Header() {
     const onClickClear = () => {
         dispatch(setSearchValue(''))
         setValue('');
-        inputRef.current.focus();
+        inputRef.current?.focus()
     }
     return (
         <header className="header">

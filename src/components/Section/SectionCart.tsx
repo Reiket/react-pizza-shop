@@ -4,11 +4,11 @@ import {useDispatch, useSelector} from "react-redux";
 import CartItem from "./Card/CartItem";
 import {clearItem, selectCart} from "../../redux/slices/cart-slice";
 
-function SectionCart(props) {
+function SectionCart() {
     const dispatch = useDispatch();
 
     const {totalPrice, items} = useSelector(selectCart)
-    const totalCount = items.reduce((sum, item) => sum + item.count, 0)
+    const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0)
 
     const onClickRemove = () => {
         if(window.confirm('Are you sure you want to remove?')) {
@@ -25,7 +25,7 @@ function SectionCart(props) {
                             <button onClick={onClickRemove} className="section-cart__clear icon-delete">Очистити кошик</button>
                         </div>
                         <div className="section-cart__body">
-                            {items.map((obj, index) => <CartItem key={index} {...obj}/>)}
+                            {items.map((obj: any, index: number) => <CartItem key={index} {...obj}/>)}
 
                             <div className="section-cart__bottom cart-bottom">
                                 <div className="cart-bottom__info">

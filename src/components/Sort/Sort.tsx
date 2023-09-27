@@ -1,15 +1,34 @@
 import React from 'react';
-function Sort({activeId, onClickCategory, sortId, onClickSort, conditionSort, onClickConditionSort}) {
-    const category = ['Всі', 'Мясні', 'Вегетеріанські', 'Гриль', 'Гострі', 'Закриті'];
-    const sortCategory = [{name: 'популярності', sortProperty: 'rating'},{name: 'ціні', sortProperty:'price'},{name: 'алфавіту', sortProperty:'title'}]
+
+type SortCategoryType = {
+    name: string
+    sortProperty: string
+}
+
+type PropsType = {
+    activeId: number
+    sortId: number
+    conditionSort: boolean
+    onClickCategory: (index: number) => void
+    onClickSort: (index: number, sortProperty: string) => void
+    onClickConditionSort: () => void
+}
+
+type PopupClickType = MouseEvent & {
+    composedPath:() =>  Array<Node>;
+}
+const Sort: React.FC<PropsType> = ({activeId,onClickConditionSort, onClickCategory, sortId, onClickSort, conditionSort}) => {
+    const category: Array<string> = ['Всі', 'Мясні', 'Вегетеріанські', 'Гриль', 'Гострі', 'Закриті'];
+    const sortCategory: Array<SortCategoryType> = [{name: 'популярності', sortProperty: 'rating'},{name: 'ціні', sortProperty:'price'},{name: 'алфавіту', sortProperty:'title'}]
     const [isOpenPopup, setIsOpenPopup] = React.useState(false);
-    const sortRef = React.useRef();
+    const sortRef = React.useRef<HTMLDivElement>(null);
      const onClickToPopup = () => {
          setIsOpenPopup(prev => !prev);
     }
     React.useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (!event.composedPath().includes(sortRef.current)) {
+        const handleClickOutside = (event: MouseEvent) => {
+            const _event = event as PopupClickType;
+            if (sortRef.current && !_event.composedPath().includes(sortRef.current)) {
                 setIsOpenPopup(false)
             }
         }
